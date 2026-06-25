@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>球神直播 · 站点介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fde5c2 0%, #f9d8b0 40%, #f5cba0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem 1rem;
+        }
+
+        .container {
+            max-width: 880px;
+            width: 100%;
+        }
+
+        /* 白色卡片通用 */
+        .card {
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            box-shadow: 0 12px 24px rgba(180, 100, 40, 0.12), 0 4px 10px rgba(0,0,0,0.03);
+            padding: 2.2rem 2.4rem;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 18px 32px rgba(160, 80, 30, 0.15);
+        }
+
+        /* hero 区域 */
+        .hero-card {
+            text-align: center;
+            background: rgba(255, 250, 240, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 170, 0.5);
+            padding: 3.2rem 2.4rem 2.6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(255,200,130,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #4d2c1a;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #724b2e;
+            max-width: 580px;
+            margin: 0 auto 1.2rem;
+            line-height: 1.6;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #e8c9ae;
+            color: #3d2215;
+            font-weight: 500;
+            font-size: 0.82rem;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            box-shadow: inset 0 1px 3px rgba(255, 235, 210, 0.7);
+        }
+
+        /* 介绍段落 */
+        .intro-text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #2f1e13;
+        }
+
+        .intro-text a {
+            color: #a64b2a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #e6ba98;
+            padding-bottom: 1px;
+            transition: border-color 0.2s, background 0.2s;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .intro-text a:hover {
+            background: #f2dac6;
+            border-bottom-color: #a64b2a;
+        }
+
+        /* 特点网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.6rem 0 0.4rem;
+        }
+
+        .feature-item {
+            background: rgba(255, 245, 230, 0.6);
+            border-radius: 28px;
+            padding: 1.2rem 1.2rem 1.4rem;
+            border: 1px solid #f7e0cc;
+            transition: all 0.15s;
+        }
+
+        .feature-item:hover {
+            background: #faeadc;
+            border-color: #dbb594;
+            transform: translateY(-2px);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4c2c19;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-item p {
+            font-size: 0.93rem;
+            color: #4f3422;
+            line-height: 1.5;
+        }
+
+        /* 场景提醒 + 说明区域 */
+        .scene-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 0.2rem 0 0.8rem;
+        }
+
+        .scene-block {
+            flex: 1 1 180px;
+        }
+
+        .scene-block h4 {
+            font-weight: 600;
+            color: #4d2b18;
+            border-left: 5px solid #dba77c;
+            padding-left: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .scene-block p {
+            font-size: 0.97rem;
+            color: #422c1d;
+            line-height: 1.6;
+            padding-left: 1.1rem;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            margin-top: 0.2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.1rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #4f2d19;
+            margin-bottom: 0.2rem;
+            font-size: 1.02rem;
+        }
+
+        .faq-item p {
+            color: #3e2a1b;
+            font-size: 0.96rem;
+            line-height: 1.5;
+            padding-left: 0.6rem;
+            border-left: 2px solid #efd3ba;
+            padding-left: 1rem;
+        }
+
+        .faq-more {
+            font-size: 0.9rem;
+            color: #7d5c40;
+            text-align: right;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* 底部链接卡片 */
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem 1.6rem;
+            background: #fcf1e3;
+            border-radius: 40px;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 4px 8px rgba(140, 80, 30, 0.06);
+        }
+
+        .footer-links .brand {
+            font-weight: 600;
+            color: #5b3922;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-links .brand a {
+            color: #a64b2a;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+
+        .footer-links .brand a:hover {
+            border-bottom: 2px solid #bb7a58;
+        }
+
+        .footer-links .meta {
+            font-size: 0.85rem;
+            color: #7a5a40;
+        }
+
+        .footer-links .meta span {
+            display: inline-block;
+            margin: 0 0.6rem 0 0;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.8rem; }
+            .card { padding: 1.6rem 1.2rem; }
+            .hero-title { font-size: 2.2rem; }
+            .features-grid { gap: 1rem; }
+            .footer-links { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- hero 区 -->
+        <div class="card hero-card">
+            <div class="hero-title">球神直播</div>
+            <div class="hero-sub">
+                一个关于体育赛事、电竞赛事与实时互动的信息聚合站点。<br>
+                内容清晰，定位直接，为观众提供便利的直播导航。
+            </div>
+            <div class="hero-badge">站点介绍 · 可信说明</div>
+        </div>
+
+        <!-- 站点介绍 / 可信说明 -->
+        <div class="card">
+            <div class="intro-text">
+                <p><strong>球神直播</strong> 是一个致力于整理和呈现体育赛事、电竞赛事直播资源的网站。站内信息均来自公开渠道与稳定内容源，站点本身不生产或存储任何流媒体内容，仅作为导航与聚合角色。团队长期维护链接有效性与信息准确性，并定期更新页面结构，让访问者可以快速定位自己感兴趣的比赛或节目。</p>
+                <p style="margin-top: 1rem;">如果你正在寻找一个清爽、无过度推销的直播信息页，<a href="https://intl-qiushen.com">球神直播</a> 能够提供相对完整的赛事分类与时间参考。站点以实用性为优先，不收集私人信息，不设置强制弹窗，访问体验更接近一份整理好的观赛清单。</p>
+            </div>
+        </div>
+
+        <!-- 优势区：特点 + 场景 -->
+        <div class="card">
+            <h2 style="font-weight: 600; font-size: 1.5rem; color: #422918; margin-bottom: 1.2rem; letter-spacing: -0.2px;">特点与适用场景</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>📋 分类清晰</h3>
+                    <p>足球、篮球、网球、电竞等热门项目单独列出，层级简明，减少查找时间。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🕒 时间参考</h3>
+                    <p>页面内附有比赛时间提示，帮助提前规划观看安排，不再错过关键场次。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔗 直达链接</h3>
+                    <p>每个赛事条目都附有对应直播资源链接，点击即可跳转至相关页面。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🧩 多端适配</h3>
+                    <p>从电脑到手机，页面布局自动调整，阅读与交互体验保持一致。</p>
+                </div>
+            </div>
+
+            <div class="scene-wrap">
+                <div class="scene-block">
+                    <h4>日常观赛</h4>
+                    <p>适合习惯提前浏览赛程、快速找到对应直播入口的观众。无需反复搜索，打开站点即可了解今日热门。</p>
+                </div>
+                <div class="scene-block">
+                    <h4>信息核对</h4>
+                    <p>当你需要确认某一场比赛的直播源是否仍然有效，或了解近期新增了哪些联赛，可以在本站参考核对。</p>
+                </div>
+                <div class="scene-block">
+                    <h4>轻量参考</h4>
+                    <p>界面简洁，没有冗余广告或自动播放内容，适合只想快速获取直播信息的用户。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要 + 补充说明 -->
+        <div class="card faq-summary">
+            <h2 style="font-weight: 600; font-size: 1.45rem; color: #4b2b17; margin-bottom: 1.2rem;">常见问题摘要</h2>
+
+            <div class="faq-item">
+                <strong>球神直播的链接都来自哪里？</strong>
+                <p>所有直播链接均来自互联网公开资源，站内对来源进行初步筛选与分类，但不保证每条链接永久有效。如遇到失效链接，可稍后再试或关注后续更新。</p>
+            </div>
+            <div class="faq-item">
+                <strong>站点是否需要注册或付费？</strong>
+                <p>完全免费，无需注册或登录。站点本身不设置任何付费门槛，亦不要求提供个人信息。你只需要打开页面浏览即可。</p>
+            </div>
+            <div class="faq-item">
+                <strong>内容更新频率如何？</strong>
+                <p>团队会根据热门赛事周期与链接变动情况不定期更新，重大比赛日之前通常会有内容调整。你可以把 <a href="https://intl-qiushen.com" style="color:#a64b2a; text-decoration: none; border-bottom: 1px solid #dbb18b;">球神直播</a> 加入书签，方便随时回来查看。</p>
+            </div>
+            <div class="faq-item">
+                <strong>如果发现页面显示异常或链接错误怎么办？</strong>
+                <p>由于外部资源变动，偶尔会出现链接失效或排版偏移。你可以通过页面底部的信息渠道反馈（若有），或等待下一次内容刷新。站内不设即时客服，但会尽量保持整体可用性。</p>
+            </div>
+            <div class="faq-more">— 更多细节可浏览页面内各板块 —</div>
+        </div>
+
+        <!-- 底部链接 / 站点标识 -->
+        <div class="footer-links">
+            <div class="brand">
+                <a href="https://intl-qiushen.com">球神直播</a>
+            </div>
+            <div class="meta">
+                <span>信息聚合 · 导航页</span>
+                <span>非官方 · 纯公益</span>
+            </div>
+            <div class="meta" style="font-size:0.8rem; opacity:0.7;">
+                <span>内容仅供参考 请自行辨别</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
